@@ -8,7 +8,11 @@ class ThumbnailSprite extends Plugin {
 
   constructor(player: videojs.Player, options?: ThumbnailSprite.Options) {
     super(player);
-    this.options = options !== undefined ? options : [];
+    const emptyOptions: ThumbnailSprite.Options = {
+      sprites: [],
+    }
+    this.options = (options !== undefined) ? options : emptyOptions;
+    
 
     // When player instance is ready, initialize the plugin
     this.player.ready(() => {
@@ -20,10 +24,15 @@ class ThumbnailSprite extends Plugin {
   }
 }
 
+
 videojs.registerPlugin('thumbnailSprite', ThumbnailSprite);
+console.log(videojs.getPlugins());
+
 
 namespace ThumbnailSprite {
-  export type Options = Array<Sprite>;
+  export interface Options {
+    sprites: Array<Sprite>;
+  }
   export interface Sprite {
     url: string;      // thumbnail sprite's url
     start: number;    // start timestamp of this sprite in video
