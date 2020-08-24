@@ -46,6 +46,7 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@rollup/plugin-replace": "^2.3.3",
+    "@testing-library/jest-dom": "^5.11.4",
     "@types/jest": "^26.0.9",
     "@types/sinon": "^9.0.4",
     "install-peers-cli": "^2.2.0",
