@@ -2,9 +2,22 @@
   "name": "videojs-thumbnail-sprite",
   "version": "0.1.0",
   "description": "Video.js plugin to display preview image of a video at the point of time when hovering on progress bar",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnest:main": "dist/index.es.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
   "scripts": {
-    "test": "npm run test"
+    "test": "npx jest --ci --coverage",
+    "test:watch": "npx jest  --watchAll --coverage --verbose",
+    "build:watch": "npx rollup -c --watch",
+    "build:prod": "npx rollup -c rollup.config.prod.js",
+    "prepare:peers": "npx install-peers -f"
   },
   "repository": {
     "type": "git",
