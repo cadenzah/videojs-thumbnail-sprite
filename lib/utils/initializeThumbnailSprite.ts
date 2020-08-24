@@ -45,11 +45,14 @@ function generatePreview(
   const progressCtrl: IIndexableComponent = controls['progressControl'];
   const seekBar: IIndexableComponent = progressCtrl['seekBar'];
   const mouseTimeDisplay: IIndexableComponent = seekBar['mouseTimeDisplay'];
-  const mouseTimeDisplayElement: HTMLElement = mouseTimeDisplay.el() as HTMLElement;
+  const timeTooltip: IIndexableComponent = mouseTimeDisplay['timeTooltip'];
+  
+  const mouseTimeDisplayEl: HTMLElement = mouseTimeDisplay.el() as HTMLElement;
+  const timeTooltipEl: HTMLElement = timeTooltip.el() as HTMLElement;
 
   // 호버링이 발생하면
   // 1. 호버링된 시간을 식별한다 (event listener 등록)
-  let hoverPoint = parseFloat(mouseTimeDisplayElement.style.left);
+  let hoverPoint = parseFloat(mouseTimeDisplayEl.style.left);
   hoverPoint = player.duration() * (hoverPoint / seekBar.currentWidth()); // 현재 재생 시점 구하기
 
   // 2. 해당 시점에 대응하는 스프라이트, 스프라이트 내 인덱스를 찾는다
@@ -101,7 +104,7 @@ function generatePreview(
   const topOffset = -sprite.height - Math.max(0, seekBarTop - controlsTop);
     
     // (2) 실제 스타일에 맞추어 적용
-  applyStyle(mouseTimeDisplayElement, {
+  applyStyle(timeTooltipEl, {
     'width': `${sprite.width}px`,
     'height': `${sprite.height}px`,
     'background-image': `url(${sprite.url})`,
@@ -109,6 +112,7 @@ function generatePreview(
     'background-position': `${columnLeft}px ${columnTop}px`,
     'background-size': `${imageWidth}px ${imageHeight}px;`,
     'top': `${topOffset}px`,
+
     'color': `#ffffff`,
     'text-shadow': `1px 1px #000000`,
     'border': `1px 1px #000000`,
