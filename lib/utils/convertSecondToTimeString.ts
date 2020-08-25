@@ -1,21 +1,30 @@
 function convertSecondToTimeString(seconds: number): string {
-  let resultSecond = 0, resultMinute = 0, resultHour = 0;
+  let resultSecond: string | number = 0;
+  let resultMinute: string | number = 0;
+  let resultHour: string | number = 0;
   // 00:00:00 Format
   if (seconds <= 0) {
     return `00:00:00`;
   } else if (seconds < 60) {
     // less than a minute
-    return `00:00:${seconds}`;
+    resultSecond = seconds;
+    resultSecond = (resultSecond < 10) ? `0${resultSecond}` : resultSecond;
+    return `00:00:${resultSecond}`;
   } else if (seconds < 3600) {
     // less than an hour
-    resultMinute = seconds / 60;
+    resultMinute = parseInt(`${seconds / 60}`);
+    resultMinute = (resultMinute < 10) ? `0${resultMinute}` : resultMinute;
     resultSecond = seconds % 60;
+    resultSecond = (resultSecond < 10) ? `0${resultSecond}` : resultSecond;
     return `00:${resultMinute}:${resultSecond}`;
   } else {
     // more than an hour
-    resultHour = seconds / 3600;
-    resultMinute = (seconds % 3600) / 60;
-    resultSecond = ((seconds % 3600) % 60) / 60;
+    resultHour = parseInt(`${seconds / 3600}`);
+    resultHour = (resultHour < 10) ? `0${resultHour}` : resultHour;
+    resultMinute = parseInt(`${(seconds % 3600) / 60}`);
+    resultMinute = (resultMinute < 10) ? `0${resultMinute}` : resultMinute;
+    resultSecond = parseInt(`${((seconds % 3600) % 60) % 60}`);
+    resultSecond = (resultSecond < 10) ? `0${resultSecond}` : resultSecond;
     return `${resultHour}:${resultMinute}:${resultSecond}`;
   }
 }

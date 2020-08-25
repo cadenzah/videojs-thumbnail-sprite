@@ -81,17 +81,17 @@ function generatePreview(
     
   // apply image preview
   applyStyle(timeTooltipEl, {
-    'width': `${sprite.width}px`,
-    'height': `${sprite.height}px`,
+    width: `${sprite.width}px`,
+    height: `${sprite.height}px`,
     'background-image': `url(${sprite.url})`,
     'background-repeat': `no-repeat`,
     'background-position': `${columnLeft}px ${columnTop}px`,
     'background-size': `${imageWidth}px ${imageHeight}px;`,
-    'top': `${topOffset}px`,
-    'color': `#ffffff`,
+    top: `${topOffset}px`,
+    color: `#ffffff`,
     'text-shadow': `1px 1px #000000`,
-    'border': `1px 1px #000000`,
-    'margin': `0 1px`
+    border: `1px 1px #000000`,
+    margin: `0 1px`
   });
   // TODO
   // apply global style from `options` parameter
