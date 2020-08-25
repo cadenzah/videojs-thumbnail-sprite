@@ -12,6 +12,7 @@
     "lib": "lib",
     "test": "tests"
   },
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "npx jest --ci --coverage",
     "test:watch": "npx jest  --watchAll --coverage --verbose",
