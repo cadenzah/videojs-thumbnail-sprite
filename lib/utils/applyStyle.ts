@@ -1,13 +1,12 @@
-function applyStyle(parent: HTMLElement, obj: any) {
-  const keys = Object.keys(obj);
+function applyStyle(parent: HTMLElement, style: any) {
+  const keys = Object.keys(style);
   keys.map((key) => {
-    const value = obj[key];
-    const tooltipStyle = parent.style;
+    const value = style[key];
 
     if (value !== '')
-      tooltipStyle.setProperty(key, value);
-    else
-      tooltipStyle.removeProperty(key);
+      parent.style.setProperty(key, value);
+    else // remove preiously set style which is not included this time
+      parent.style.removeProperty(key);
   })
 }
 

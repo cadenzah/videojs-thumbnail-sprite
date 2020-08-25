@@ -1,6 +1,6 @@
 function convertSecondToTimeString(seconds: number): string {
   let resultSecond = 0, resultMinute = 0, resultHour = 0;
-  // 00:00:00 포맷으로
+  // 00:00:00 Format
   if (seconds <= 0) {
     return `00:00:00`;
   } else if (seconds < 60) {

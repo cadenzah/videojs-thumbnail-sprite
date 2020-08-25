@@ -38,7 +38,7 @@ function initializeThumbnailSprite(player: videojs.Player, options: TS.Options):
   // Register event listener for hovering on progress control
   progressCtrl.on(`mousemove`, () => generatePreview(player, controls, sprites));
   progressCtrl.on(`touchmove`, () => generatePreview(player, controls, sprites));
-  // Add class to enable 
+  // Add class to enable styling
   player.addClass(`vjs-sprite-thumbnails`);
 }
 
