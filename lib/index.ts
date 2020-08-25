@@ -13,7 +13,6 @@ class ThumbnailSprite extends Plugin {
     }
     this.options = (options !== undefined) ? options : emptyOptions;
     
-
     // When player instance is ready, initialize the plugin
     this.player.ready(() => {
       initializeThumbnailSprite(

@@ -3,32 +3,43 @@ import TS from '../index';
 
 import sortSprites from './sortSprites';
 import checkOverlap from './checkOverlap';
+import checkOptions from './checkOptions';
 import generatePreview from './generatePreview';
 
-// 옵션에 값 빠진 경우에 대한 필터링 조건절 필요
 function initializeThumbnailSprite(player: videojs.Player, options: TS.Options): void {
-  // If there is no option provided, no need to initialize the plugin
-  if (options.sprites.length === 0)
+  // If there is no option provided,
+  // No need to initialize the plugin
+  if (options.sprites === undefined)
     return ;
   const { sprites } = options;
+
+  // If there is no Control Bar UI or no Progress Control UI,
+  // No need to initialize the plugin
+  if (player.controlBar === undefined)
+    return ;
+  
   const controls: TS.IIndexableComponent = player.controlBar;
+  if (controls['progressControl'] === undefined)
+    return ;
+  
   const progressCtrl: TS.IIndexableComponent = controls['progressControl'];
 
-  // # settings init
-  // Assumes that the player has default player UIs
-  // such as control bar, progress bar, etc.
-
-  // 0. 옵션 정리 - 스프라이트 담당 구간 시간 순으로 정렬 - 뒤섞여 들어오는 입력 대비
+  // Sort sprite images to prevent inappropriate order
   sortSprites(sprites);
 
-  // 0. 썸네일 구간에 겹치는 것이 있는지 확인
-  // 겹치면, 경고 발생
-  // 겹치는 시간이 있는 시간을 알려준다 (최소시점, 최대시점)
+  // Check if the sprite thumbnails have overlapping section among them,
+  // so that previews display their corresponding points of time correctly
   checkOverlap(sprites);
 
-  progressCtrl.on('mousemove', () => generatePreview(player, controls, sprites));
-  progressCtrl.on('touchmove', () => generatePreview(player, controls, sprites));
-  player.addClass('vjs-sprite-thumbnails');
+  // Check if the sprite thumbnails have all required options properly,
+  // so that generating each previews executes correctly
+  checkOptions(sprites);
+
+  // Register event listener for hovering on progress control
+  progressCtrl.on(`mousemove`, () => generatePreview(player, controls, sprites));
+  progressCtrl.on(`touchmove`, () => generatePreview(player, controls, sprites));
+  // Add class to enable 
+  player.addClass(`vjs-sprite-thumbnails`);
 }
 
 export default initializeThumbnailSprite;
