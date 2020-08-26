@@ -9,6 +9,7 @@ Video.js plugin to display preview image of a video at the point of time when ho
 
 ## Table of Contents
 - Features
+- Demo
 - Install
   - Prerequisite
 - Usage
@@ -25,6 +26,9 @@ Video.js plugin to display preview image of a video at the point of time when ho
 - Easy to configure
 - Typescript support
 - Support using multiple sprite images for each sections of video
+
+## Demo
+You can see how it works on [the demo site](https://cadenzah.github.io/videojs-thumbnail-sprite).
 
 ## Install
 ```bash
