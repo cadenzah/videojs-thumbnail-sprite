@@ -20,15 +20,15 @@ function generatePreview(
 
   // If there is no Seek Bar UI or Mouse Time Display UI,
   // No Need to initialize the plugin
-  if (progressCtrl['seekBar'] === undefined)
+  if (progressCtrl['seekBar'] === null)
     return ;
   
   const seekBar: TS.IIndexableComponent = progressCtrl['seekBar'];
-  if (seekBar['mouseTimeDisplay'] === undefined)
+  if (seekBar['mouseTimeDisplay'] === null)
     return ;
 
   const mouseTimeDisplay: TS.IIndexableComponent = seekBar['mouseTimeDisplay'];
-  if (mouseTimeDisplay['timeTooltip'] === undefined)
+  if (mouseTimeDisplay['timeTooltip'] === null)
     return ;
 
   const timeTooltip: TS.IIndexableComponent = mouseTimeDisplay['timeTooltip'];
