@@ -1,11 +1,11 @@
-function applyStyle(parent: HTMLElement, style: any) {
+function applyStyle(parent: HTMLElement, style: any): void {
   const keys = Object.keys(style);
   keys.map((key) => {
     const value = style[key];
 
     if (value !== '')
       parent.style.setProperty(key, value);
-    else // remove preiously set style which is not included this time
+    else // If key's value is empty, remove that style
       parent.style.removeProperty(key);
   })
 }

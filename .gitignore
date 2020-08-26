@@ -4,6 +4,7 @@ node_modules/
 # build related files
 dist/
 build/
+!lib/types/video.js/dist
 
 # test results
 coverage/
