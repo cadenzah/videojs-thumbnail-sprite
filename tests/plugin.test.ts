@@ -191,10 +191,6 @@ describe(`Integrated Test`, () => {
       ];
     });
 
-    // afterEach(() => {
-    //   player.dispose();
-    // });
-
     it(`Registers the plugin on \`video.js\` properly`, () => {
       // given
       const spyConsole = sinon.stub(console, 'error'); // surpress for test purpose
@@ -203,7 +199,6 @@ describe(`Integrated Test`, () => {
       const options: TS.Options = { sprites };
 
       // when
-      // player.thumbnailSprite(options);
       const TSPlugin = new TS(
         player,
         options
@@ -217,9 +212,5 @@ describe(`Integrated Test`, () => {
       clock.restore();
       spyConsole.restore();
     });
-
-    it(`Replace empty option with default one`, () => {
-
-    })
   });
 });
