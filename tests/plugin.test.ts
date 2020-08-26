@@ -5,8 +5,6 @@ import {
   generatePreview,
   initializeThumbnailSprite,
 } from '../lib/utils';
-const Player = videojs.getComponent('player');
-
 
 describe(`Integrated Test`, () => {
   describe(`# utils/generatePreview.ts`, () => {
@@ -111,14 +109,12 @@ describe(`Integrated Test`, () => {
   describe(`# utils/initializeThumbnailSprite.ts`, () => {
     let videoElement: HTMLElement;
     let player: videojs.Player;
-    let controls: TS.IIndexableComponent;
     let sprites: Array<TS.Sprite>;
 
     beforeEach(() => {
       videoElement = document.createElement('video');
       document.body.appendChild(videoElement);
       player = videojs(videoElement);
-      controls = player.controlBar;
       sprites = [
         {
           url: 'https://test.url/video1.png',
@@ -167,8 +163,63 @@ describe(`Integrated Test`, () => {
   });
 
   describe(`# index.ts`, () => {
-    it(`Test Not Written yet!`, () => {
-      
+    let videoElement: HTMLElement;
+    let player: videojs.Player;
+    let sprites: Array<TS.Sprite>;
+
+    beforeEach(() => {
+      videoElement = document.createElement('video');
+      document.body.appendChild(videoElement);
+      player = videojs(videoElement);
+      sprites = [
+        {
+          url: 'https://test.url/video1.png',
+          start: 0,
+          duration: 10,
+          width: 160,
+          height: 90,
+          interval: 2,
+        },
+        {
+          url: 'https://test.url/video2.png',
+          start: 10,
+          duration: 10,
+          width: 160,
+          height: 90,
+          interval: 2,
+        },
+      ];
     });
+
+    // afterEach(() => {
+    //   player.dispose();
+    // });
+
+    it(`Registers the plugin on \`video.js\` properly`, () => {
+      // given
+      const spyConsole = sinon.stub(console, 'error'); // surpress for test purpose
+      const spy = sinon.spy(player, 'ready');
+      const clock = sinon.useFakeTimers();
+      const options: TS.Options = { sprites };
+
+      // when
+      // player.thumbnailSprite(options);
+      const TSPlugin = new TS(
+        player,
+        options
+      );
+      clock.tick(3000);
+
+      // then
+      expect(player.hasClass(`vjs-sprite-thumbnails`)).toBe(true);
+      expect(spy.callCount).toBe(1);
+      player.dispose();
+      clock.restore();
+      spyConsole.restore();
+    });
+
+    it(`Replace empty option with default one`, () => {
+
+    })
   });
 });
