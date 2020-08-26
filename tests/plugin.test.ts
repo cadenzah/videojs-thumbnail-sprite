@@ -1,8 +1,10 @@
 import sinon from 'sinon';
-
 import videojs from 'video.js';
 import TS from '../lib';
-import { generatePreview } from '../lib/utils';
+import {
+  generatePreview,
+  initializeThumbnailSprite,
+} from '../lib/utils';
 const Player = videojs.getComponent('player');
 
 
@@ -40,7 +42,7 @@ describe(`Integrated Test`, () => {
 
     afterEach(() => {
       player.dispose();
-    })
+    });
 
     it(`Generates Preview and apply it successfully`, () => {
       // given
@@ -102,14 +104,65 @@ describe(`Integrated Test`, () => {
       mouseTimeDisplayElement.style.left = `50px`;  // current position of hover
       generatePreview(player, controls, sprites);
 
-      // then
-
+      // then - error not occurred
     });
   });
 
   describe(`# utils/initializeThumbnailSprite.ts`, () => {
-    it(`Test not written yet!`, () => {
-      
+    let videoElement: HTMLElement;
+    let player: videojs.Player;
+    let controls: TS.IIndexableComponent;
+    let sprites: Array<TS.Sprite>;
+
+    beforeEach(() => {
+      videoElement = document.createElement('video');
+      document.body.appendChild(videoElement);
+      player = videojs(videoElement);
+      controls = player.controlBar;
+      sprites = [
+        {
+          url: 'https://test.url/video1.png',
+          start: 0,
+          duration: 10,
+          width: 160,
+          height: 90,
+          interval: 2,
+        },
+        {
+          url: 'https://test.url/video2.png',
+          start: 10,
+          duration: 10,
+          width: 160,
+          height: 90,
+          interval: 2,
+        },
+      ];
+    });
+
+    afterEach(() => {
+      player.dispose();
+    });
+
+    it(`plugin is initialized well `, () => {
+      // given
+      const options: TS.Options = { sprites };
+
+      // when
+      initializeThumbnailSprite(player, options);
+
+      // then
+      expect(player.hasClass(`vjs-sprite-thumbnails`)).toBe(true);
+    });
+
+    it(`if sprites in option is empty, plugin does not initialize`, () => {
+      // given
+      const options: TS.Options = <TS.Options>{ };
+
+      // when
+      initializeThumbnailSprite(player, options);
+
+      // then
+      expect(player.hasClass(`vjs-sprite-thumbnails`)).toBe(false);
     });
   });
 
